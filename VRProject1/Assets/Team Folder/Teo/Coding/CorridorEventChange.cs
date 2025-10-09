@@ -1,39 +1,93 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using System.Collections;
 
 public class CorridorEventChange : MonoBehaviour
 {
-    [SerializeField] private Renderer[] walls;
+    [Header("Walls")]
+    [SerializeField] private Renderer[] walls;    
     [SerializeField] private Material creepyMaterial;
-    [SerializeField] private Light newLight;
-    private Material[] originalMaterials;
-    private bool hasTriggered = false;
+    [SerializeField] private float flashDuration = 1.5f;
 
-    void Start()
+    [Header("Post Processing")]
+    [SerializeField] private Volume creepyVolume; 
+    [SerializeField] private float fadeSpeed = 2f;
+
+    private Material[] originalMaterials;
+    private bool hasTriggered;
+
+    void Awake()
     {
+        // Cache original wall materials
+        if (walls == null || walls.Length == 0)
+        {
+            Debug.LogWarning("[CorridorEventChange] No walls assigned.");
+            return;
+        }
+
         originalMaterials = new Material[walls.Length];
         for (int i = 0; i < walls.Length; i++)
+        {
+            if (walls[i] == null) continue;
             originalMaterials[i] = walls[i].material;
+        }
+
+        if (creepyVolume != null)
+            creepyVolume.weight = 0f; 
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (hasTriggered) return;
         if (!other.CompareTag("Player")) return;
-        Debug.Log("PlayerTriggeredEvent");
+
         hasTriggered = true;
-        StartCoroutine(FlashWalls());
+        StartCoroutine(FlashSequence());
     }
 
-    private IEnumerator FlashWalls()
+    private IEnumerator FlashSequence()
     {
+        
         foreach (var w in walls)
-            w.material = creepyMaterial;
-        newLight.enabled = false;
-        yield return new WaitForSeconds(1.5f);
+        {
+            if (w != null)
+                w.material = creepyMaterial;
+        }
 
+      
+        if (creepyVolume != null)
+        {
+            float t = 0f;
+            while (t < 1f)
+            {
+                t += Time.deltaTime * fadeSpeed;
+                creepyVolume.weight = Mathf.Lerp(0f, 1f, t);
+                yield return null;
+            }
+        }
+
+        
+        yield return new WaitForSeconds(flashDuration);
+
+    
+        if (creepyVolume != null)
+        {
+            float t = 1f;
+            while (t > 0f)
+            {
+                t -= Time.deltaTime * fadeSpeed;
+                creepyVolume.weight = Mathf.Lerp(0f, 1f, t);
+                yield return null;
+            }
+
+            creepyVolume.weight = 0f;
+        }
+
+    
         for (int i = 0; i < walls.Length; i++)
-            walls[i].material = originalMaterials[i];
-        newLight.enabled = true;
+        {
+            if (walls[i] != null && originalMaterials[i] != null)
+                walls[i].material = originalMaterials[i];
+        }
     }
 }
