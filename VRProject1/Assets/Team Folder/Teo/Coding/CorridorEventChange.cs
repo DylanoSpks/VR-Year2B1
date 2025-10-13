@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class CorridorEventChange : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class CorridorEventChange : MonoBehaviour
     [SerializeField] private Renderer[] walls;    
     [SerializeField] private Material creepyMaterial;
     [SerializeField] private float flashDuration = 1.5f;
+
+    [Header("SFX")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpScare;
 
     [Header("Post Processing")]
     [SerializeField] private Volume creepyVolume; 
@@ -47,7 +52,10 @@ public class CorridorEventChange : MonoBehaviour
 
     private IEnumerator FlashSequence()
     {
-        
+
+        if (audioSource != null && jumpScare != null)
+            audioSource.PlayOneShot(jumpScare);
+
         foreach (var w in walls)
         {
             if (w != null)
