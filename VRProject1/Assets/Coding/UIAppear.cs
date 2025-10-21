@@ -1,28 +1,30 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
-
-public class UIAppear : MonoBehaviour
-
-
+namespace Coding
 {
-    [SerializeField] private GameObject UITrigger;
-    [SerializeField] private GameObject player;
-    [SerializeField] float remainingTime;
+    public class UIAppear : MonoBehaviour
 
-    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && remainingTime > 0)
-            StartCoroutine(StartTimer());
+        [SerializeField] private GameObject offObject;
+        [SerializeField] private GameObject uiTrigger;
+        [SerializeField] private GameObject player;
+        [SerializeField] float remainingTime;
 
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player") && remainingTime > 0)
+                StartCoroutine(StartTimer());
+
+        }
     
-    IEnumerator StartTimer()
-    {
-        UITrigger.SetActive(true);
-        yield return new WaitForSeconds(remainingTime);
-        UITrigger.SetActive(false);
+        //Starts a timer that makes the hit box onenter and the UI disappear after a set amount of time
+        IEnumerator StartTimer()
+        {
+            uiTrigger.SetActive(true);
+            yield return new WaitForSeconds(remainingTime);
+            uiTrigger.SetActive(false);
+            offObject.SetActive(false);
+        }
     }
 }
