@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class Teleport : MonoBehaviour
-
-
+namespace Coding
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject teleportPos;
+    public class Teleport : MonoBehaviour
+
+
+    {
+        [SerializeField] private GameObject player;
+        [SerializeField] private GameObject teleportPos;
     
 
-private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            player.transform.position = teleportPos.transform.position;
+            if (other.CompareTag("Player"))
+            {
+                player.transform.position = teleportPos.transform.position;
+            }
         }
     }
 }
