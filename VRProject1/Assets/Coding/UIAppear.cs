@@ -16,7 +16,6 @@ namespace Coding
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player") && remainingTime > 0)
-                Debug.Log("Fuck my chungus life");
                 StartCoroutine(StartTimer());
         }
     
