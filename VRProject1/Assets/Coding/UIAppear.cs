@@ -23,13 +23,16 @@ namespace Coding
         IEnumerator StartTimer()
         {
             uiTrigger.SetActive(true);
+            offObject.SetActive(false);
             yield return new WaitForSeconds(remainingTime);
+
             uiTrigger.SetActive(false);
+
             //After the first UI is done the 2nd start with its own timer that can be set within unity
             uiTrigger2.SetActive(true);
             yield return new WaitForSeconds(remainingTime2);
             uiTrigger2.SetActive(false);
-            offObject.SetActive(false);
+           
         }
         
     }

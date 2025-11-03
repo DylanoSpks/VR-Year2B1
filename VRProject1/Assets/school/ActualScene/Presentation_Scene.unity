@@ -1363,7 +1363,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.11
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2982,9 +2982,9 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0ad8bf4b1d9cbd84e9283e2a7ba51aa4, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.343
+  m_Volume: 0.617
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4011,7 +4011,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.261
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -9238,7 +9238,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.636
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -10968,7 +10968,7 @@ Transform:
   m_GameObject: {fileID: 439376786}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 17.3}
+  m_LocalPosition: {x: 0, y: 0, z: 24.322}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10995,8 +10995,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 7.8820343
+  MinDistance: 7.8820343
+  MaxDistance: 7.8820353
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -11609,7 +11609,6 @@ GameObject:
   - component: {fileID: 475614774}
   - component: {fileID: 475614773}
   - component: {fileID: 475614772}
-  - component: {fileID: 475614771}
   m_Layer: 0
   m_Name: UIStarter1 (1)
   m_TagString: Untagged
@@ -11632,24 +11631,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 664385233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &475614771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475614769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bb8b3eb1df56c4a9e5ebde7ca28678, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Coding.UIAppear
-  offObject: {fileID: 475614769}
-  uiTrigger: {fileID: 130652375}
-  uiTrigger2: {fileID: 0}
-  player: {fileID: 0}
-  remainingTime: 17
-  remainingTime2: 0
 --- !u!65 &475614772
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11996,7 +11977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &484536766
 Transform:
   m_ObjectHideFlags: 0
@@ -15569,7 +15550,7 @@ Transform:
   m_GameObject: {fileID: 641775797}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.02, y: 5.958, z: 68.06}
+  m_LocalPosition: {x: 8.94, y: 5.958, z: 68.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15588,7 +15569,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.043
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -16665,7 +16646,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.11
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -18445,7 +18426,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.053
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -18899,6 +18880,14 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1391662972570090073, guid: 36ecef7eccfcafc439ce859495a6b7b4, type: 3}
+      propertyPath: MaxDistance
+      value: 4.41554
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391662972795500232, guid: 36ecef7eccfcafc439ce859495a6b7b4, type: 3}
+      propertyPath: MaxDistance
+      value: 4.53398
+      objectReference: {fileID: 0}
     - target: {fileID: 1863766488237876531, guid: 36ecef7eccfcafc439ce859495a6b7b4, type: 3}
       propertyPath: _defaultHeight
       value: 2.3
@@ -18921,7 +18910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8242169727990950624, guid: 36ecef7eccfcafc439ce859495a6b7b4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -118.3
+      value: -147.777
       objectReference: {fileID: 0}
     - target: {fileID: 8242169727990950624, guid: 36ecef7eccfcafc439ce859495a6b7b4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21514,7 +21503,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.042
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -23188,7 +23177,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.226
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -27209,55 +27198,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.92, z: 0}
---- !u!1 &1110618416
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1110618418}
-  - component: {fileID: 1110618417}
-  m_Layer: 0
-  m_Name: Global Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1110618417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110618416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 0ef2dbf57dc95f6498d93c65b04a1d95, type: 2}
---- !u!4 &1110618418
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110618416}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -86.87644, y: -3.8913429, z: -94.632706}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1114282163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30796,7 +30736,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.11
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -32177,7 +32117,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.177
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -37179,7 +37119,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.251
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -53986,7 +53926,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9a1d519f911be324ba5ea4213eb8bdef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.11
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -53994,7 +53934,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 4.066948
+  MinDistance: 4.3239365
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -55321,7 +55261,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 771593390}
-  - {fileID: 1110618418}
   - {fileID: 1483683227}
   - {fileID: 664385233}
   - {fileID: 156464646}
