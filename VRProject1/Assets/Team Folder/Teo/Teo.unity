@@ -401,9 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37a027e8b221024a90907ca3d8c6b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPickupAutoWire
-  itemId: Item1
+  itemId: ItemBrac
   dialogueText: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-  verbose: 1
+  verbose: 0
 --- !u!1 &230895131
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +418,6 @@ GameObject:
   - component: {fileID: 230895133}
   - component: {fileID: 230895132}
   - component: {fileID: 230895138}
-  - component: {fileID: 230895139}
   m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
@@ -559,27 +558,6 @@ MonoBehaviour:
   rotateLerp: 20
   minY: 0.2
   overrideCamera: {fileID: 1569593473}
---- !u!114 &230895139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 230895131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b77be46fbec091d40937aafb2e5831db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
-  uiRoot: {fileID: 959455324}
-  dialogueText: {fileID: 2035526593}
-  showSeconds: 3
-  followHead: 1
-  followDistance: 1.2
-  verticalOffset: -0.05
-  followLerp: 12
-  rotateLerp: 20
-  minY: 0.2
 --- !u!1 &251901980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1031,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636681742}
-  - component: {fileID: 636681744}
   - component: {fileID: 636681743}
   m_Layer: 0
   m_Name: ISDK_HandGrabInteraction
@@ -1100,47 +1077,6 @@ MonoBehaviour:
   _releaseDistance: 0
   _resetGrabOnGrabsUpdated: 1
   _physicsGrabbable: {fileID: 0}
---- !u!114 &636681744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636681741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a7676b01585ce43908639a27765dfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactorFilters: []
-  _maxInteractors: -1
-  _maxSelectingInteractors: -1
-  _data: {fileID: 0}
-  _pointableElement: {fileID: 121506935}
-  _rigidbody: {fileID: 121506936}
-  _physicsGrabbable: {fileID: 0}
-  _resetGrabOnGrabsUpdated: 1
-  _scoringModifier:
-    _positionRotationWeight: 0.5
-  _slippiness: 0
-  _supportedGrabTypes: 3
-  _pinchGrabRules:
-    _thumbRequirement: 0
-    _indexRequirement: 1
-    _middleRequirement: 1
-    _ringRequirement: 0
-    _pinkyRequirement: 0
-    _unselectMode: 1
-  _palmGrabRules:
-    _thumbRequirement: 1
-    _indexRequirement: 0
-    _middleRequirement: 2
-    _ringRequirement: 2
-    _pinkyRequirement: 1
-    _unselectMode: 0
-  _movementProvider: {fileID: 0}
-  _handAligment: 0
-  _handGrabPoses: []
 --- !u!1 &695045513
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,6 +3106,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5012950114965239629, guid: 36ecef7eccfcafc439ce859495a6b7b4, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8101738437407180800, guid: 36ecef7eccfcafc439ce859495a6b7b4, type: 3}
       propertyPath: m_Name
       value: '[BuildingBlock] Camera Rig'
