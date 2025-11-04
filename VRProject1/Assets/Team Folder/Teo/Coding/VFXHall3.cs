@@ -5,32 +5,39 @@ using UnityEngine.Rendering.Universal;
 public class VFXHall3 : MonoBehaviour
 {
     public Volume volume;
-    public Transform player;
-    public Transform guiltPoint;
-    public float reactRadius = 7f;
+    public Transform player;        // XR center-eye
+    public Transform guiltPoint;    // hotspot
+    [Min(0.1f)] public float reactRadius = 7f;
 
-    [Header("Heartbeat")]
-    public float bpm = 54f;
-    public float exposureDip = 0.18f;
-    public float vignetteAdd = 0.10f;
-    public float fogDip = 0.0025f;      // global fog delta on beat (tiny)
-    public float minFog = 0.0f;         // clamp
+    [Header("Heartbeat (luminance-safe)")]
+    [Range(30f, 120f)] public float bpm = 54f;
+    [Range(0f, 1f)] public float exposureDip = 0.12f;   // was 0.18
+    [Range(-1f, 1f)] public float baseExposure = 0.00f;  // was -0.2 (raise base)
+    [Range(-1f, 1f)] public float minExposure = -0.15f;  // clamp floor
 
-    [Header("Proximity")]
-    public float maxDesat = -85f;
-    public Color redBias = new Color(0.55f, 0.05f, 0.05f, 1f);
+    [Header("Vignette")]
+    [Range(0f, 1f)] public float baseVignette = 0.42f;  // was 0.50
+    [Range(0f, 1f)] public float vignetteAdd = 0.06f;  // was 0.10
+    [Range(0f, 1f)] public float maxVignette = 0.55f;   // cap
 
+    [Header("Fog (global RenderSettings)")]
+    [Range(0f, 0.02f)] public float fogDip = 0.0015f;      // was 0.0025
+    [Range(0.5f, 1f)] public float minFogFactor = 0.8f;   // never go below 80% of base
+
+    [Header("Color Grade")]
+    [Range(-100f, 0f)] public float baseSat = -40f;        // was -60
+    [Range(-100f, 0f)] public float maxDesat = -50f;       // clamp most extreme
+    [Range(0f, 1f)] public float filterStrength = 0.15f;// 0..1 blend to redBias
+    public Color redBias = new Color(0.95f, 0.7f, 0.7f, 1f); // light tint (not dark)
+
+    // Components
     ColorAdjustments colorAdj;
     Vignette vignette;
     ShadowsMidtonesHighlights smh;
 
-    float baseExposure = -0.2f;
-    float baseVignette = 0.5f;
-    float baseSat = -60f;
-    Color baseFilter = new Color(0.47f, 0.08f, 0.08f, 1f);
-
+    // Internals
     float baseFogDensity;
-    float t;
+    bool hadFog;
 
     void Awake()
     {
@@ -38,60 +45,77 @@ public class VFXHall3 : MonoBehaviour
         volume.profile.TryGet(out colorAdj);
         volume.profile.TryGet(out vignette);
         volume.profile.TryGet(out smh);
-        baseFogDensity = RenderSettings.fog ? RenderSettings.fogDensity : 0f;
+
+        hadFog = RenderSettings.fog;
+        baseFogDensity = hadFog ? RenderSettings.fogDensity : 0f;
+
+        // Safety caps
+        maxVignette = Mathf.Clamp01(maxVignette);
+        baseVignette = Mathf.Min(baseVignette, maxVignette);
+        if (maxDesat > baseSat) maxDesat = baseSat; // ensure target <= base
     }
 
     void OnDisable()
     {
-        // restore fog density
-        if (RenderSettings.fog) RenderSettings.fogDensity = baseFogDensity;
+        if (hadFog) RenderSettings.fogDensity = baseFogDensity;
     }
 
     void Update()
     {
         if (!player || !guiltPoint) return;
 
+        // Proximity 0..1
         float dist = Vector3.Distance(player.position, guiltPoint.position);
-        float prox = Mathf.Clamp01(1f - dist / reactRadius);
+        float prox = Mathf.Clamp01(1f - dist / Mathf.Max(reactRadius, 0.001f));
 
-        // proximity grading
+        // Heartbeat (double tap)
+        float pulse = HeartPulse(bpm, Time.time);
+
+        // --- Color Adjustments ---
         if (colorAdj)
         {
-            colorAdj.saturation.Override(Mathf.Lerp(baseSat, maxDesat, prox));
-            colorAdj.colorFilter.Override(Color.Lerp(baseFilter, redBias, prox * 0.8f));
+            // Exposure with floor clamp
+            float expTarget = baseExposure - exposureDip * pulse * (0.6f + 0.4f * prox);
+            colorAdj.postExposure.Override(Mathf.Max(minExposure, expTarget));
+
+            // Desat ramps but not past maxDesat
+            float sat = Mathf.Lerp(baseSat, maxDesat, prox);
+            colorAdj.saturation.Override(sat);
+
+            // Gentle tint (blend from white to light red)
+            Color tint = Color.Lerp(Color.white, redBias, prox * filterStrength);
+            colorAdj.colorFilter.Override(tint);
         }
 
-        // heartbeat
-        t += Time.deltaTime;
-        float pulse = HeartPulse(bpm, t); // 0..1 two-tap shape
-
-        if (colorAdj)
-            colorAdj.postExposure.Override(baseExposure - exposureDip * pulse * (0.6f + 0.4f * prox));
-
+        // --- Vignette ---
         if (vignette)
-            vignette.intensity.Override(Mathf.Clamp01(baseVignette + vignetteAdd * pulse * (0.5f + 0.5f * prox)));
-
-        if (RenderSettings.fog)
         {
-            float d = Mathf.Max(minFog, baseFogDensity - fogDip * pulse * (0.6f + 0.4f * prox));
-            RenderSettings.fogDensity = d;
+            float v = baseVignette + vignetteAdd * pulse * (0.5f + 0.5f * prox);
+            vignette.intensity.Override(Mathf.Min(maxVignette, Mathf.Clamp01(v)));
         }
 
-        // subtle midtone push with proximity
+        // --- Fog ---
+        if (hadFog)
+        {
+            float minAllowed = baseFogDensity * minFogFactor;
+            float target = Mathf.Max(minAllowed, baseFogDensity - fogDip * pulse * (0.6f + 0.4f * prox));
+            RenderSettings.fogDensity = target;
+        }
+
+        // --- Midtone red bias (kept subtle; doesn’t tank luminance) ---
         if (smh != null)
         {
             var mids = smh.midtones.value;
-            mids.x = 0.05f + prox * 0.04f;
-            mids.y = -0.02f - prox * 0.01f;
-            mids.z = 0.02f + prox * 0.01f;
+            mids.x = Mathf.Lerp(0.05f, 0.09f, prox);
+            mids.y = Mathf.Lerp(-0.02f, -0.035f, prox);
+            mids.z = Mathf.Lerp(0.02f, 0.03f, prox);
             smh.midtones.Override(mids);
         }
     }
 
-    float HeartPulse(float bpm, float time)
+    float HeartPulse(float bpmVal, float time)
     {
-        float f = bpm / 60f;
-        // double beat: quick pulse + aftershock
+        float f = bpmVal / 60f;
         float a = Mathf.Abs(Mathf.Sin(time * f * Mathf.PI * 2f));
         float b = Mathf.Abs(Mathf.Sin((time + 0.2f) * f * Mathf.PI * 2f));
         return Mathf.Clamp01(a * 0.7f + b * 0.3f);
