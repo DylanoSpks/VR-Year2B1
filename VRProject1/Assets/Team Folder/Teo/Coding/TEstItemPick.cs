@@ -2,7 +2,7 @@
 using UnityEngine;
 using Oculus.Interaction;
 // If you also use HandGrabInteractable, uncomment the next line and mirror the subscription.
-// using Oculus.Interaction.HandGrab;
+using Oculus.Interaction.HandGrab;
 
 public class FirstPickupAutoWire : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class FirstPickupAutoWire : MonoBehaviour
     [SerializeField] private bool verbose = false;
 
     private readonly List<GrabInteractable> grabs = new();
-    // private readonly List<HandGrabInteractable> handGrabs = new();
+    private readonly List<HandGrabInteractable> handGrabs = new();
 
     private string Key => $"pickup_seen_{itemId}";
 
@@ -24,8 +24,8 @@ public class FirstPickupAutoWire : MonoBehaviour
         if (verbose) Debug.Log($"[AutoWire] Found {grabs.Count} GrabInteractable(s) under '{name}'");
 
         // If using hand grab too:
-        // GetComponentsInChildren(true, handGrabs);
-        // if (verbose) Debug.Log($"[AutoWire] Found {handGrabs.Count} HandGrabInteractable(s) under '{name}'");
+        GetComponentsInChildren(true, handGrabs);
+        if (verbose) Debug.Log($"[AutoWire] Found {handGrabs.Count} HandGrabInteractable(s) under '{name}'");
     }
 
     private void OnEnable()
@@ -35,17 +35,17 @@ public class FirstPickupAutoWire : MonoBehaviour
             g.WhenPointerEventRaised += OnEvt;
             if (verbose) Debug.Log($"[AutoWire] Subscribed to '{g.gameObject.name}'");
         }
-        // foreach (var hg in handGrabs)
-        // {
-        //     hg.WhenPointerEventRaised += OnEvt;
-        //     if (verbose) Debug.Log($"[AutoWire] Subscribed (hand) to '{hg.gameObject.name}'");
-        // }
+        foreach (var hg in handGrabs)
+         {
+             hg.WhenPointerEventRaised += OnEvt;
+             if (verbose) Debug.Log($"[AutoWire] Subscribed (hand) to '{hg.gameObject.name}'");
+         }
     }
 
     private void OnDisable()
     {
         foreach (var g in grabs) g.WhenPointerEventRaised -= OnEvt;
-        // foreach (var hg in handGrabs) hg.WhenPointerEventRaised -= OnEvt;
+         foreach (var hg in handGrabs) hg.WhenPointerEventRaised -= OnEvt;
     }
 
     private void OnEvt(PointerEvent e)

@@ -329,7 +329,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 230895133}
   - component: {fileID: 230895132}
   - component: {fileID: 230895138}
+  - component: {fileID: 230895139}
   m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
@@ -558,6 +559,27 @@ MonoBehaviour:
   rotateLerp: 20
   minY: 0.2
   overrideCamera: {fileID: 1569593473}
+--- !u!114 &230895139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230895131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77be46fbec091d40937aafb2e5831db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  uiRoot: {fileID: 959455324}
+  dialogueText: {fileID: 2035526593}
+  showSeconds: 3
+  followHead: 1
+  followDistance: 1.2
+  verticalOffset: -0.05
+  followLerp: 12
+  rotateLerp: 20
+  minY: 0.2
 --- !u!1 &251901980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,7 +1425,7 @@ RectTransform:
   m_GameObject: {fileID: 959455324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2035526592}
@@ -2951,8 +2973,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.44
-  m_fontSizeBase: 19.44
+  m_fontSize: 16.96
+  m_fontSizeBase: 16.96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2989,7 +3011,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -31.883343, y: 0, z: -31.266659, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
